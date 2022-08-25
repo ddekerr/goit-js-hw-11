@@ -44,7 +44,6 @@ async function onSearch(e) {
   // send request to host getting images
   await gallery.getImagesByQuery(queryString)
     .then(markupGalleryContainer)
-    .then(smoothScroll)
     .catch(e => Notify.failure(e.message))
 
   // instance of Lightbox
@@ -86,15 +85,4 @@ function markupGalleryContainer(data) {
 
 function clearGalleryContainer () {
   refs.galeryContainer.innerHTML = "";
-}
-
-function smoothScroll() {
-  // get height of the first gallery element
-  const { height: cardHeight } = refs.galeryContainer.firstElementChild.getBoundingClientRect();
-
-  // scroll down on double element height
-  window.scrollBy({
-    top: cardHeight * 2,
-    behavior: "smooth",
-  });
 }
