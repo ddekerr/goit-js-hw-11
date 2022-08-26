@@ -46,15 +46,15 @@ async function onSearch(e) {
     await gallery.getImagesByQuery(queryString)
     .then(markupGalleryContainer)
     .catch(e => Notify.failure(e.message))
+
+    // instance of Lightbox
+    lightbox = new SimpleLightbox('.gallery__item', {showCounter: false});
+
+    // enable observer
+    observer.observe(refs.observe);
   } catch(e) {
     Notify.failure(e.message)
-  }
-
-  // instance of Lightbox
-  lightbox = new SimpleLightbox('.gallery__item', {showCounter: false});
-
-  // enable observer
-  observer.observe(refs.observe);
+  } 
 }
 
 
