@@ -44,23 +44,18 @@ export default class GalleryApi {
         per_page: this.PER_PAGE
       }
 
-      try {
-        // send get request to API
-        // if no response throwing error
-        const response = await axios.get(this.PIXABY_API_URL, {params})
-        .then(response => {
-          if(response.data.total === 0) {
-            const errorMessage = "Sorry, there are no images matching your search query. Please try again.";
-            throw new Error(errorMessage);
-          }
-          return response.data.hits;
-        });
-        
-        return response;
-      } catch (e) {
-        console.log(e)
-      }
+      // send get request to API
+      // if no response throwing error
+      const response = await axios.get(this.PIXABY_API_URL, {params})
+      .then(response => {
+        if(response.data.total === 0) {
+          const errorMessage = "Sorry, there are no images matching your search query. Please try again.";
+          throw new Error(errorMessage);
+        }
+        return response.data.hits;
+      });
       
+      return response;      
     }
   }
 

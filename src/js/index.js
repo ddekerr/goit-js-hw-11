@@ -41,10 +41,14 @@ async function onSearch(e) {
   // value of input element which has 'searchQuery' name attribute
   const queryString = e.target.elements.searchQuery.value;
 
-  // send request to host getting images
-  await gallery.getImagesByQuery(queryString)
+  try {
+    // send request to host getting images
+    await gallery.getImagesByQuery(queryString)
     .then(markupGalleryContainer)
     .catch(e => Notify.failure(e.message))
+  } catch(e) {
+    Notify.failure(e.message)
+  }
 
   // instance of Lightbox
   lightbox = new SimpleLightbox('.gallery__item', {showCounter: false});
@@ -71,8 +75,12 @@ async function updateImagesList(entries) {
     gallery.incrementPage();
     gallery.incrementImagesOnPage();
 
-    // send request to get next part of object and render them lower 
-    await gallery.getImagesByQuery().then(markupGalleryContainer);
+    try {
+      // send request to get next part of object and render them lower 
+      await gallery.getImagesByQuery().then(markupGalleryContainer);
+    } catch(e) {
+      Notify.failure(e.message)
+    }
 
     // refresh instance lightbox to connect new images
     lightbox.refresh();
