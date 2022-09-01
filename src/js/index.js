@@ -45,7 +45,6 @@ async function onSearch(e) {
     // send request to host getting images
     await gallery.getImagesByQuery(queryString)
     .then(markupGalleryContainer)
-    .catch(e => Notify.failure(e.message))
 
     // instance of Lightbox
     lightbox = new SimpleLightbox('.gallery__item', {showCounter: false});
